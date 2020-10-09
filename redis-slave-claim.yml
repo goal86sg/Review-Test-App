@@ -1,12 +1,11 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: redis-slave-claim
-  annotations:
-    volume.beta.kubernetes.io/storage-class: thin-disk
 spec:
+  storageClassName: vsan-default-storage-policy
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 5Gi
