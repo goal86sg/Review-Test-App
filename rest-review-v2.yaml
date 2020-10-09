@@ -51,11 +51,9 @@ metadata:
     app: yelb-ui
     tier: frontend
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 80
-    protocol: TCP
-    targetPort: 80
   selector:
     app: yelb-ui
     tier: frontend
@@ -150,3 +148,20 @@ spec:
         image:  vmware/restreview-appserver:V2
         ports:
         - containerPort: 4567
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: yelb-ui-ingress
+  labels:
+    app: yelb-ui
+  annotations:
+    kubernetes.io/ingress.class: "contour"
+spec:
+  rules:
+    - host: yelb.pks.dev.gov.sg
+      http:
+        paths:
+        - backend:
+            serviceName: yelb-ui
+            servicePort: 80
