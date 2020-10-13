@@ -155,8 +155,6 @@ metadata:
   name: yelb-ui-ingress
   labels:
     app: yelb-ui
-  annotations:
-    kubernetes.io/ingress.class: "contour"
 spec:
   rules:
     - host: yelb.pks.dev.gov.sg
